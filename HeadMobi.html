@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF Injector Pro</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00ff00;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .injector-card {
+            width: 340px;
+            background: #111;
+            border: 1px solid #00ff00;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.15);
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .status-box {
+            background: #000;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            border-left: 3px solid #00ff00;
+        }
+
+        /* Progress Bar Styling */
+        #progress-container {
+            width: 100%;
+            background-color: #222;
+            border-radius: 20px;
+            margin: 15px 0;
+            display: none; /* Sembunyi di awal */
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 12px;
+            background-color: #00ff00;
+            border-radius: 20px;
+            box-shadow: 0 0 10px #00ff00;
+            transition: width 0.1s;
+        }
+
+        #status-text {
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: none;
+            color: #ffff00;
+        }
+
+        .btn-inject {
+            background-color: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.4s;
+            text-transform: uppercase;
+        }
+
+        .btn-inject:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+
+        .log-text { color: #888; }
+        .highlight { color: #00ff00; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="injector-card">
+    <h2>MobiHack Menu</h2>
+    
+    <div class="status-box">
+        <div class="log-text">> TARGET: <span style="color:white">Free Fire/Free Fire Max</span></div>
+        <div class="log-text">> MOD: <span class="highlight">HeadMobilador 45%</span></div>
+        <div class="log-text">> STATUS: <span id="current-status">Ready</span></div>
+    </div>
+
+    <div id="status-text">Processing: 0%</div>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <button class="btn-inject" id="main-btn" onclick="startInjection()">Inject File</button>
+
+    <div style="margin-top: 15px; font-size: 0.6rem; color: #444;">
+        SERVER REGION: INDONESIA
+    </div>
+</div>
+
+<script>
+    function startInjection() {
+        const btn = document.getElementById('main-btn');
+        const pBar = document.getElementById('progress-bar');
+        const pContainer = document.getElementById('progress-container');
+        const statusText = document.getElementById('status-text');
+        const currentStatus = document.getElementById('current-status');
+
+        // Sembunyikan tombol, tampilkan progress
+        btn.style.display = 'none';
+        pContainer.style.display = 'block';
+        statusText.style.display = 'block';
+        currentStatus.innerText = 'Injecting...';
+
+        let width = 0;
+        const interval = setInterval(() => {
+            if (width >= 100) {
+                clearInterval(interval);
+                statusText.innerText = "SUCCESS: Head Mobilador 45% Added!";
+                statusText.style.color = "#00ff00";
+                currentStatus.innerText = 'Completed';
+                
+                setTimeout(() => {
+                    alert("Injection Berhasil!");
+                }, 500);
+            } else {
+                width++;
+                pBar.style.width = width + '%';
+                statusText.innerText = "Processing: " + width + "%";
+                
+                // Variasi teks log saat loading
+                if(width == 30) currentStatus.innerText = 'Bypassing Security...';
+                if(width == 60) currentStatus.innerText = 'Adding Head Mobilador...';
+                if(width == 90) currentStatus.innerText = 'Finalizing...';
+            }
+        }, 50); // Kecepatan loading (50ms per 1%)
+    }
+</script>
+
+</body>
+</html>
